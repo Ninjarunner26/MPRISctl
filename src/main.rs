@@ -19,7 +19,9 @@ fn main() {
             "next" => player.next().expect("Failed to go to next track"),
             "previous" => player.previous().expect("Failed to go to previous track"),
             "seek" => player.seek(value).expect("Failed to seek"),
-            _ => println!("not test")
+            _ => println!("Invalid operation")
         }
+    } else {
+        println!("Must provide an operation")
     }
 }
