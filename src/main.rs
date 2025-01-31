@@ -58,7 +58,8 @@ fn main() {
         Operation::Stop => player.stop().expect("failed to stop"),
         Operation::Next => player.next().expect("failed to navigate to next track"),
         Operation::Previous => player.previous().expect("failed to navigate to previous track"),
-        Operation::Seek(ms) => player.seek(ms * MICROSECONDS_IN_SECOND).expect("failed to seek"),
+        Operation::Seek(ms) => player.seek(ms * MICROSECONDS_IN_SECOND)
+                                    .expect("failed to seek"),
         Operation::Help => show_help_text(),
     }
 }
