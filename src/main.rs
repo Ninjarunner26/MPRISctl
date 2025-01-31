@@ -43,7 +43,7 @@ fn show_help_text() {
         stop - Stop the current track
         next -  Navigate to next track
         previous - Navigate to previous track
-        seek <x> - Seek x seconds. Negative number to go backwards.")
+        seek [x] - Seek x seconds. Negative number to go backwards.")
 }
 
 fn main() {
