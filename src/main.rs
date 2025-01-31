@@ -47,7 +47,8 @@ fn show_help_text() {
 }
 
 fn main() {
-    let player = PlayerFinder::new().expect("Could not connect to DBus").find_active().expect("Couldn't find active media player. Make sure one is running.");
+    let player = PlayerFinder::new().expect("Could not connect to DBus").
+    find_active().expect("Couldn't find active media player. Make sure one is running.");
     let op = get_operation();
     const MICROSECONDS_IN_SECOND: i64 = 1000000;
     match op {
