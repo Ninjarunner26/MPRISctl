@@ -1,39 +1,7 @@
-use std::env;
 use mpris::PlayerFinder;
+use operations::Operation;
 
-enum Operation {
-    Play,
-    Pause,
-    PlayPause,
-    Stop,
-    Next,
-    Previous,
-    Seek(i64),
-    Help,
-}
-
-fn get_operation() -> Operation {
-    let args: Vec<String> = env::args().collect();
-    match args.get(1) {
-        Some(op) => match op.as_str() {
-            "play" => Operation::Play,
-            "pause" => Operation::Pause,
-            "play-pause" => Operation::PlayPause,
-            "stop" => Operation::Stop,
-            "next" => Operation::Next,
-            "previous" => Operation::Previous,
-            "seek" => match args.get(2) {
-                Some(val) => match val.parse::<i64>() {
-                    Ok(num) => Operation::Seek(num),
-                    Err(_) => Operation::Help,
-                },
-                None => Operation::Help,
-            },
-            _ => Operation::Help,
-        },
-        None => Operation::Help
-    }
-}
+mod operations;
 
 fn show_help_text() {
     println!("mprisctl:
@@ -49,7 +17,7 @@ fn show_help_text() {
 fn main() {
     let player = PlayerFinder::new().expect("Could not connect to DBus").
     find_active().expect("Couldn't find active media player. Make sure one is running.");
-    let op = get_operation();
+    let op = Operation::from_args();
     const MICROSECONDS_IN_SECOND: i64 = 1000000;
     match op {
         Operation::Play => player.play().expect("failed to play"),
